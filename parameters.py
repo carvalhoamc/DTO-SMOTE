@@ -1,15 +1,15 @@
 from sklearn.decomposition import PCA
 from sklearn.manifold import Isomap
 
-order = ['area', #nao ganhou nenhuma vez no pca biclasse
-         'volume', #nao ganhou nenhuma vez no pca biclasse
-         'area_volume_ratio',#ganhou 23x no pca biclasse
-         'edge_ratio',#ganhou 21x no pca biclasse
-         'radius_ratio',#nao ganhou nenhuma vez no pca biclasse
-         'aspect_ratio',#ganhou 12x no pca biclasse
-         'max_solid_angle',#ganhou 47x no pca biclasse
-         'min_solid_angle',#ganhou 31x no pca biclasse
-         'solid_angle']#ganhou 31x no pca biclasse
+order = ['area', 
+         'volume', 
+         'area_volume_ratio'
+         'edge_ratio',
+         'radius_ratio',
+         'aspect_ratio',
+         'max_solid_angle',
+         'min_solid_angle',
+         'solid_angle']
 
 # Dirichlet Distribution alphas
 alphas = [1,4,9]
@@ -54,7 +54,7 @@ delaunay_preproc_type = [
 	'_delaunay_solid_angle_6',
 	'_delaunay_solid_angle_7',
 	'_delaunay_solid_angle_8',
-	'_delaunay_solid_angle_9']  # 27 tipos
+	'_delaunay_solid_angle_9']  
 
 delaunay_biclasse_corrigido = delaunay_preproc_type
 
@@ -73,7 +73,7 @@ delaunay_preproc_type_multiclasse = [
 	'_delaunay_solid_angle_3',
 	'_delaunay_solid_angle_5',
 	'_delaunay_solid_angle_7',
-	'_delaunay_solid_angle_9']  # 15 tipos
+	'_delaunay_solid_angle_9']  
 
 delaunay_multiclasse_corrigido = delaunay_preproc_type_multiclasse
 

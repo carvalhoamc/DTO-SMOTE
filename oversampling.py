@@ -37,11 +37,7 @@ class Oversampling:
 		pass
 	
 	def converteY(self, Y):
-		'''
-		Nos novos datasets, Y != [-1,1], precisamos converter para [-1,1]
-		:param Y:
-		:return:
-		'''
+		
 		c = np.unique(Y)
 		if not np.all(c == [-1, 1]):
 			Y[Y == 1] = -1
@@ -119,7 +115,7 @@ class Oversampling:
 				X = train[:, 0:train.shape[1] - 1]
 				Y = train[:, train.shape[1] - 1]
 				print("DELAUNAY..." + dataset)
-				for p in projectors:  # pca or isomap
+				for p in projectors:  
 					delaunay = DTO(p, dataset, pca_s=3)
 					for o in order:
 						for a in alphas:
@@ -262,7 +258,7 @@ class Oversampling:
 		plt.close()
 	
 	def runClassification(self, folder, SMOTE=False):
-		print("CLASSIFICACAO INIT")
+		print("INIT")
 		dfcol = ['ID', 'DATASET', 'FOLD', 'PREPROC', 'ALGORITHM', 'MODE', 'ORDER', 'ALPHA', 'PRE', 'REC', 'SPE', 'F1',
 		         'GEO', 'IBA',
 		         'AUC']
@@ -447,5 +443,5 @@ class Oversampling:
 		X_graph = normalize(data_graph['arr_0'])
 		y_graph = np.array(data_graph['arr_1'])
 		# Graficos
-		print('GRAFICOS1')
+		print('GRAPH')
 		self.makeGraphics(X_graph, y_graph, dataset, delaunay_model, order=o, alpha=a)

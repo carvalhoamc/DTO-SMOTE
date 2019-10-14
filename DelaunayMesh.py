@@ -97,20 +97,10 @@ class DTO(BaseOverSampler):
 		for class_sample, n_samples in self.ratio_.items():
 			if n_samples == 0:
 				continue
-			#Ronaldo version
-			#probs = self.weight_tetrahedrons(class_sample, self.order)  # weights for each simplex
-			#simplices_to_interpolate = self.random_state.choice(len(self.mesh.simplices), n_samples, p=probs)#lista de elementos baseado em probabilidade
 			
-			#AMC version
-			#pega apenas as probs diferentes de zero
-			#pega os indices destas probs diferentes de zero
-			#escolhe apenas os tetraedros em que os pesos sao diferentes de zero para interpolacao
 			probs = self.weight_tetrahedrons(class_sample, self.order)
 			indexnotz = np.nonzero(probs.values)
-			# lista de elementos baseado em probabilidade
 			simplices_to_interpolate = self.random_state.choice(indexnotz[0], n_samples,p=np.take(probs,indexnotz[0],axis=0))
-			
-			
 			X_new = np.array(
 					[self.genPoint(X[self.mesh.simplices[i]], self.beta(y[self.mesh.simplices[i]], class_sample))
 					 for i in simplices_to_interpolate])
