@@ -4,7 +4,7 @@ output_dir = "./../output_dir/"
 mesh_folder = "./../mesh/"
 graph_folder = "./../graph/"
 
-
+'''
 dir_pca_biclasse = './../rank/pca_biclasse/'
 dir_isomap_biclasse = './../rank/isomap_biclasse/'
 dir_isomap_multiclasse = './../rank/isomap_multiclasse/'
@@ -24,3 +24,4 @@ pca_multiclasse ='./../rank/pca_multiclasse/'
 isomap_multiclasse = './../rank/isomap_multiclasse/'
 
 work_delaunay_dir = './../delaunay_files/'
+'''
