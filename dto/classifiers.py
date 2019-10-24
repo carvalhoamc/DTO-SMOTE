@@ -9,8 +9,6 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
-from dialnd_imbalanced_algorithms.smote import SMOTEBoost
-
 base_estimator = AdaBoostClassifier(n_estimators=10)
 
 classifiers = {"RF": RandomForestClassifier(n_estimators=100),

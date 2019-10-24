@@ -16,14 +16,14 @@ def main():
 	print('INIT')
 	delaunaySMOTE = Oversampling()
 	print('STEP 1')
-	delaunaySMOTE.createValidationData(folder_experiments)
+	#delaunaySMOTE.createValidationData(folder_experiments)
 	print('STEP 2')
 	#delaunaySMOTE.runSMOTEvariationsGen(folder_experiments)
 	print('STEP 3')
-	#delaunaySMOTE.runDelaunayVariationsGen(folder_experiments)
+	delaunaySMOTE.runDelaunayVariationsGen(folder_experiments)
 	print('STEP 4')
 	#delaunaySMOTE.runClassification(folder_experiments,SMOTE=True)
-		
+	
 	end = time.time()
 	print("Total Execution Time : ")
 	timer(start, end)

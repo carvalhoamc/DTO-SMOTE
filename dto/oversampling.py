@@ -130,8 +130,6 @@ class Oversampling:
 									os.path.join(folder, dataset, str(fold), ''.join([dataset, "_" + name + ".csv"])),
 									header=False, index=False)
 	
-	
-	
 	def runClassification(self, folder, SMOTE=False):
 		print("INIT")
 		dfcol = ['ID', 'DATASET', 'FOLD', 'PREPROC', 'ALGORITHM', 'MODE', 'ORDER', 'ALPHA', 'PRE', 'REC', 'SPE', 'F1',
@@ -156,7 +154,7 @@ class Oversampling:
 						train = np.genfromtxt(train_path, delimiter=',')
 						X_train = train[:, 0:train.shape[1] - 1]
 						Y_train = train[:, train.shape[1] - 1]
-						Y_train = self.converteY(Y_train)  # nao precisa para multiclasse
+						Y_train = self.converteY(Y_train)  # Biclass only
 						
 						if ext == "_train":
 							X, Y = X_train, Y_train  # original dataset for plotting
@@ -181,11 +179,10 @@ class Oversampling:
 							df.at[i, 'F1'] = score[3]
 							df.at[i, 'GEO'] = score[4]
 							df.at[i, 'IBA'] = score[5]
-							df.at[i, 'AUC'] = roc_auc_score(Y_test, Y_pred)  # binario
-							# df.at[i, 'AUC'] = -1  # multiclasse
+							df.at[i, 'AUC'] = roc_auc_score(Y_test, Y_pred)  # biclass
+							# df.at[i, 'AUC'] = -1  # multiclass
 							
 							i = i + 1
-				# print(fold, identificador)
 				
 				# DELAUNAY LIKE CLASSIFICATION
 				print("Run DTO")
@@ -197,7 +194,7 @@ class Oversampling:
 							train = np.genfromtxt(train_path, delimiter=',')
 							X_train = train[:, 0:train.shape[1] - 1]
 							Y_train = train[:, train.shape[1] - 1]
-							Y_train = self.converteY(Y_train)  # multiclasse
+							Y_train = self.converteY(Y_train)  # multiclass
 							for alg, clf in classifiers.items():
 								clf.fit(X_train, Y_train)
 								Y_pred = clf.predict(X_test)
@@ -222,7 +219,7 @@ class Oversampling:
 								df.at[i, 'AUC'] = roc_auc_score(Y_test, Y_pred)  # biclass
 								# df.at[i, 'AUC'] = -1  # multiclass
 								i = i + 1
-					# print(fold, identificador)
+			
 			df.to_csv(output_dir + 'resultado_biclasse_' + p.__class__.__name__ + '.csv', index=False)
 			print('DTO file on SSD')
 	
@@ -254,4 +251,3 @@ class Oversampling:
 				             index=False)
 				test.to_csv(os.path.join(folder, dataset, str(fold), ''.join([dataset, "_test.csv"])), header=False,
 				            index=False)
-	

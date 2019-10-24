@@ -1,0 +1,68 @@
+Possibles erros generating DTO files.
+
+If some error like this occur it is necessary run again with some modifications.
+
+DELAUNAY...spambase
+DELAUNAY...spambase
+DELAUNAY...spambase
+DELAUNAY...spambase
+Traceback (most recent call last):
+  File "/home/amc/CARVALHO_ML/dto/Main.py", line 33, in <module>
+    main()
+  File "/home/amc/CARVALHO_ML/dto/Main.py", line 23, in main
+    delaunaySMOTE.runDelaunayVariationsGen(folder_experiments)
+  File "/home/amc/CARVALHO_ML/dto/oversampling.py", line 125, in runDelaunayVariationsGen
+    X_res, y_res = delaunay.fit_sample(X, Y)
+  File "/home/amc/tools/intelpython3/envs/nlp/lib/python3.7/site-packages/imblearn/base.py", line 84, in fit_resample
+    output = self._fit_resample(X, y)
+  File "/home/amc/CARVALHO_ML/dto/DelaunayMesh.py", line 41, in _fit_resample
+    return self._sample(X, y)
+  File "/home/amc/CARVALHO_ML/dto/DelaunayMesh.py", line 103, in _sample
+    simplices_to_interpolate = self.random_state.choice(indexnotz[0], n_samples,p=np.take(probs,indexnotz[0],axis=0))
+  File "mtrand.pyx", line 1146, in mtrand.RandomState.choice
+ValueError: probabilities are not non-negative
+
+
+All others datasets were processed so, only run the datasets needed.
+
+
+
+Change datasetsDelaunay.py like here:
+
+datasets = ['spambase',
+	'spectf-heart',
+	'statlog-german-credit',
+	'statlog-german-credit-numeric',
+	'thoracic-surgery',
+	'thyroid-hypothyroid',
+	'thyroid-sick-euthyroid',
+	'vertebra-column-2c',
+	'wdbc',
+	'wholesale-channel',
+	'wilt'
+]
+
+
+
+IMPORTANT
+
+In main.py file, comment this lines before rerun.
+
+
+
+def main():
+	start = time.time()
+	print('INIT')
+	delaunaySMOTE = Oversampling()
+	print('STEP 1')
+	#delaunaySMOTE.createValidationData(folder_experiments) #comment this line
+	print('STEP 2')
+	#delaunaySMOTE.runSMOTEvariationsGen(folder_experiments) #comment this line
+	print('STEP 3')
+	delaunaySMOTE.runDelaunayVariationsGen(folder_experiments)
+	print('STEP 4')
+	delaunaySMOTE.runClassification(folder_experiments,SMOTE=True)
+	
+	end = time.time()
+	print("Total Execution Time : ")
+	timer(start, end)

@@ -4,7 +4,7 @@ from sklearn.manifold import Isomap
 #geometry
 order = ['area',
          'volume',
-         'area_volume_ratio'
+         'area_volume_ratio',
          'edge_ratio',
          'radius_ratio',
          'aspect_ratio',
@@ -18,7 +18,7 @@ alphas = [1,4,9]
 # Compression Methods
 projectors = [PCA()]
 
-
+train_smote_ext = ["_train", "_SMOTE", "_Borderline1", "_Borderline2", "_smoteSVM","_Geometric_SMOTE"]
 
 
 
