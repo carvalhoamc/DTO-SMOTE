@@ -115,7 +115,7 @@ class Oversampling:
 				X = train[:, 0:train.shape[1] - 1]
 				Y = train[:, train.shape[1] - 1]
 				print("DELAUNAY..." + dataset)
-				for p in projectors:  
+				for p in projectors:
 					delaunay = DTO(p, dataset, pca_s=3)
 					for o in order:
 						for a in alphas:
@@ -130,132 +130,7 @@ class Oversampling:
 									os.path.join(folder, dataset, str(fold), ''.join([dataset, "_" + name + ".csv"])),
 									header=False, index=False)
 	
-	def cria_graficos(self):
-		
-		NAME = 'thyroid-hypothyroid'
-		fig, ((ax1, ax2), (ax3, ax4), (ax5, ax6), (ax7, ax8)) = plt.subplots(4, 2, figsize=(15, 30))
-		arquivos = [NAME + '_train.csv',
-		            NAME + '_SMOTE.csv',
-		            NAME + '_Borderline1.csv',
-		            NAME + '_Borderline2.csv',
-		            NAME + '_smoteSVM.csv',
-		            NAME + '_Geometric_SMOTE.csv',
-		            NAME + '_delaunay_PCA_max_solid_angle_1.csv',
-		            NAME + '_delaunay_PCA_max_solid_angle_9.csv']
-				
-		#ax1.set_title(NAME + '\n' + ' Original data')
-		ax2.set_title(NAME + '\n' + ' Resampling SMOTE')
-		ax3.set_title(NAME + '\n' + ' Resampling Borderline SMOTE 1')
-		ax4.set_title(NAME + '\n' + ' Resampling Borderline SMOTE 2')
-		ax5.set_title(NAME + '\n' + ' Resampling SVMSMOTE')
-		ax6.set_title(NAME + '\n' + ' Resampling Geometric SMOTE')
-		ax7.set_title(NAME + '\n' + ' Resampling using DTO max_solid_angle alpha=1')
-		ax8.set_title(NAME + '\n' + ' Resampling using DTO max_solid_angle alpha=9')
-		
-		for arq in arquivos:
-			path = './../graficos2d/' + arq
-			train = np.genfromtxt(path, delimiter=',')
-			X = train[:, 0:train.shape[1] - 1]
-			Y = train[:, train.shape[1] - 1]
-			X_t = normalize(X)
-			y_graph = np.array(Y)
-			pcaR = PCA(n_components=2)
-			X_graph = pcaR.fit_transform(X_t)
-			
-			if arq == arquivos[0]:
-				ax = ax1
-				ax.scatter(X_graph[:, 0], X_graph[:, 1], c=y_graph, alpha=0.8, edgecolor='k')
-				# make nice plotting
-				ax.spines['top'].set_visible(False)
-				ax.spines['right'].set_visible(False)
-				ax.get_xaxis().tick_bottom()
-				ax.get_yaxis().tick_left()
-				ax.spines['left'].set_position(('outward', 10))
-				ax.spines['bottom'].set_position(('outward', 10))
-				ax1.set_title(NAME + '\n' + ' Original data'+ '\n' + 'y={}'.format(Counter(y_graph)))
-			
-			if arq == arquivos[1]:
-				ax = ax2
-				ax.scatter(X_graph[:, 0], X_graph[:, 1], c=y_graph, alpha=0.8, edgecolor='k')
-				# make nice plotting
-				ax.spines['top'].set_visible(False)
-				ax.spines['right'].set_visible(False)
-				ax.get_xaxis().tick_bottom()
-				ax.get_yaxis().tick_left()
-				ax.spines['left'].set_position(('outward', 10))
-				ax.spines['bottom'].set_position(('outward', 10))
-			
-			if arq == arquivos[2]:
-				ax = ax3
-				ax.scatter(X_graph[:, 0], X_graph[:, 1], c=y_graph, alpha=0.8, edgecolor='k')
-				# make nice plotting
-				ax.spines['top'].set_visible(False)
-				ax.spines['right'].set_visible(False)
-				ax.get_xaxis().tick_bottom()
-				ax.get_yaxis().tick_left()
-				ax.spines['left'].set_position(('outward', 10))
-				ax.spines['bottom'].set_position(('outward', 10))
-			
-			if arq == arquivos[3]:
-				ax = ax4
-				ax.scatter(X_graph[:, 0], X_graph[:, 1], c=y_graph, alpha=0.8, edgecolor='k')
-				# make nice plotting
-				ax.spines['top'].set_visible(False)
-				ax.spines['right'].set_visible(False)
-				ax.get_xaxis().tick_bottom()
-				ax.get_yaxis().tick_left()
-				ax.spines['left'].set_position(('outward', 10))
-				ax.spines['bottom'].set_position(('outward', 10))
-			
-			if arq == arquivos[4]:
-				ax = ax5
-				ax.scatter(X_graph[:, 0], X_graph[:, 1], c=y_graph, alpha=0.8, edgecolor='k')
-				# make nice plotting
-				ax.spines['top'].set_visible(False)
-				ax.spines['right'].set_visible(False)
-				ax.get_xaxis().tick_bottom()
-				ax.get_yaxis().tick_left()
-				ax.spines['left'].set_position(('outward', 10))
-				ax.spines['bottom'].set_position(('outward', 10))
-			
-			if arq == arquivos[5]:
-				ax = ax6
-				ax.scatter(X_graph[:, 0], X_graph[:, 1], c=y_graph, alpha=0.8, edgecolor='k')
-				# make nice plotting
-				ax.spines['top'].set_visible(False)
-				ax.spines['right'].set_visible(False)
-				ax.get_xaxis().tick_bottom()
-				ax.get_yaxis().tick_left()
-				ax.spines['left'].set_position(('outward', 10))
-				ax.spines['bottom'].set_position(('outward', 10))
-			
-			if arq == arquivos[6]:
-				ax = ax7
-				ax.scatter(X_graph[:, 0], X_graph[:, 1], c=y_graph, alpha=0.8, edgecolor='k')
-				# make nice plotting
-				ax.spines['top'].set_visible(False)
-				ax.spines['right'].set_visible(False)
-				ax.get_xaxis().tick_bottom()
-				ax.get_yaxis().tick_left()
-				ax.spines['left'].set_position(('outward', 10))
-				ax.spines['bottom'].set_position(('outward', 10))
-			
-			if arq == arquivos[7]:
-				ax = ax8
-				ax.scatter(X_graph[:, 0], X_graph[:, 1], c=y_graph, alpha=0.8, edgecolor='k')
-				# make nice plotting
-				ax.spines['top'].set_visible(False)
-				ax.spines['right'].set_visible(False)
-				ax.get_xaxis().tick_bottom()
-				ax.get_yaxis().tick_left()
-				ax.spines['left'].set_position(('outward', 10))
-				ax.spines['bottom'].set_position(('outward', 10))
-		
-		print('GRAFICOS2')
-		fig.tight_layout()
-		plt.savefig(graph_folder + NAME + '_' + 'max_solid_angle' + '_' + '1_9' + '.pdf', dpi=300,
-		            bbox_inches='tight')
-		plt.close()
+	
 	
 	def runClassification(self, folder, SMOTE=False):
 		print("INIT")
@@ -344,8 +219,8 @@ class Oversampling:
 								df.at[i, 'F1'] = score[3]
 								df.at[i, 'GEO'] = score[4]
 								df.at[i, 'IBA'] = score[5]
-								df.at[i, 'AUC'] = roc_auc_score(Y_test, Y_pred)  # binario
-								# df.at[i, 'AUC'] = -1  # multiclasse
+								df.at[i, 'AUC'] = roc_auc_score(Y_test, Y_pred)  # biclass
+								# df.at[i, 'AUC'] = -1  # multiclass
 								i = i + 1
 					# print(fold, identificador)
 			df.to_csv(output_dir + 'resultado_biclasse_' + p.__class__.__name__ + '.csv', index=False)
@@ -380,68 +255,3 @@ class Oversampling:
 				test.to_csv(os.path.join(folder, dataset, str(fold), ''.join([dataset, "_test.csv"])), header=False,
 				            index=False)
 	
-	def makeGraphics(self, X, y, dataset, delaunay, order, alpha):
-		fig, ((ax1, ax2), (ax3, ax4), (ax5, ax6)) = plt.subplots(3, 2, figsize=(15, 30))
-		sampler1 = FakeSampler()
-		sampler2 = SMOTE(random_state=0)
-		sampler3 = BorderlineSMOTE(random_state=0, kind='borderline-1')
-		sampler4 = GeometricSMOTE(random_state=0)
-		sampler5 = SVMSMOTE(random_state=0)
-		delaunay.set_order(order)
-		delaunay.set_equal_alpha(alpha)
-		sampler6 = delaunay  # Delaunay
-		
-		pcaR = PCA(n_components=2)
-		X_pca2 = pcaR.fit_transform(X)
-		
-		self.plot_resampling(X_pca2, y, sampler1, ax1)
-		ax1.set_title(dataset + '\n' + ' Original data' + '\n' + ' y={}'.format(Counter(y)))
-		
-		y_res = self.plot_resampling(X_pca2, y, sampler2, ax2)
-		ax2.set_title(dataset + '\n' + ' y={}'.format(Counter(y_res)) + '\n' + ' Resampling SMOTE')
-		
-		y_res = self.plot_resampling(X_pca2, y, sampler3, ax3)
-		ax3.set_title(dataset + '\n' + ' y={}'.format(Counter(y_res)) + '\n' + ' Resampling Borderline SMOTE 1')
-		
-		y_res = self.plot_resampling(X_pca2, y, sampler4, ax4)
-		ax4.set_title(dataset + '\n' + ' y={}'.format(Counter(y_res)) + '\n' + ' Resampling Geometric SMOTE')
-		
-		y_res = self.plot_resampling(X_pca2, y, sampler5, ax5)
-		ax5.set_title(dataset + '\n' + ' y={}'.format(Counter(y_res)) + '\n' + ' Resampling SVMSMOTE')
-		
-		y_res = self.plot_resampling(X_pca2, y, sampler6, ax6)
-		ax6.set_title(dataset + '\n' + ' y={}'.format(Counter(y_res)) + '\n' + ' Resampling using Delaunay')
-		
-		print('GRAFICOS2')
-		fig.tight_layout()
-		plt.savefig(graph_folder + dataset + '_' + str(order) + '_' + str(alpha) + '.pdf')
-		plt.close()
-	
-	def plot_resampling(self, X, y, sampling, ax):
-		'''
-		plot the sample space after resampling
-		:param X:
-		:param y:
-		:param sampling:
-		:param ax:
-		:return:
-		'''
-		X_res, y_res = sampling.fit_resample(X, y)
-		ax.scatter(X_res[:, 0], X_res[:, 1], c=y_res, alpha=0.8, edgecolor='k')
-		# make nice plotting
-		ax.spines['top'].set_visible(False)
-		ax.spines['right'].set_visible(False)
-		ax.get_xaxis().tick_bottom()
-		ax.get_yaxis().tick_left()
-		ax.spines['left'].set_position(('outward', 10))
-		ax.spines['bottom'].set_position(('outward', 10))
-		return Counter(y_res)
-	
-	def build_graphs(self, dataset, delaunay_model, o, a):
-		fname_graph = os.path.join(work_dir, ''.join([dataset, ".npz"]))
-		data_graph = np.load(fname_graph)
-		X_graph = normalize(data_graph['arr_0'])
-		y_graph = np.array(data_graph['arr_1'])
-		# Graficos
-		print('GRAPH')
-		self.makeGraphics(X_graph, y_graph, dataset, delaunay_model, order=o, alpha=a)
