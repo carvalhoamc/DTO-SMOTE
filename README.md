@@ -1,11 +1,12 @@
 # DTO-SMOTE
 Delaunay Tesselation Oversampling SMOTE.
+A new method to oversampling imbalanced datasets.
 
-Run DTO-SMOTE Biclass Datasets :
+To run DTO-SMOTE Biclass Datasets :
 #python3 main.py
 
 -----------------------------------------------
-Run DTO-SMOTE Multiclass Datasets:
+To run DTO-SMOTE Multiclass Datasets:
 
 File: datasetsDelaunay.py line 82
 Change 
