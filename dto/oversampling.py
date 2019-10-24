@@ -222,7 +222,8 @@ class Oversampling:
 								# df.at[i, 'AUC'] = -1  # multiclass
 								i = i + 1
 			
-			df.to_csv(output_dir + 'resultado_biclasse_' + p.__class__.__name__ + '.csv', index=False)
+			df.to_csv(output_dir + 'results_biclass_' + p.__class__.__name__ + '.csv', index=False)
+			#df.to_csv(output_dir + 'results_multiclass_' + p.__class__.__name__ + '.csv', index=False)
 			print('DTO file on SSD')
 	
 	def createValidationData(self, folder):
