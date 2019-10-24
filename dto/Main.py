@@ -20,9 +20,9 @@ def main():
 	print('STEP 2')
 	#delaunaySMOTE.runSMOTEvariationsGen(folder_experiments)
 	print('STEP 3')
-	delaunaySMOTE.runDelaunayVariationsGen(folder_experiments)
+	#delaunaySMOTE.runDelaunayVariationsGen(folder_experiments)
 	print('STEP 4')
-	#delaunaySMOTE.runClassification(folder_experiments,SMOTE=True)
+	delaunaySMOTE.runClassification(folder_experiments,SMOTE=True)
 	
 	end = time.time()
 	print("Total Execution Time : ")

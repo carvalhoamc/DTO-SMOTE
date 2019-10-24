@@ -131,7 +131,7 @@ class Oversampling:
 									header=False, index=False)
 	
 	def runClassification(self, folder, SMOTE=False):
-		print("INIT")
+		print("INIT CLASSIFICATION IMBALANCED DATASETS")
 		dfcol = ['ID', 'DATASET', 'FOLD', 'PREPROC', 'ALGORITHM', 'MODE', 'ORDER', 'ALPHA', 'PRE', 'REC', 'SPE', 'F1',
 		         'GEO', 'IBA',
 		         'AUC']
@@ -139,7 +139,9 @@ class Oversampling:
 		i = 0
 		
 		for dataset in datasets:
+			print(dataset)
 			for fold in range(5):
+				print(fold)
 				test_path = os.path.join(folder, dataset, str(fold), ''.join([dataset, "_test.csv"]))
 				test = np.genfromtxt(test_path, delimiter=',')
 				X_test = test[:, 0:test.shape[1] - 1]
