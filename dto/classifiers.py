@@ -22,3 +22,5 @@ classifiers = {"RF": RandomForestClassifier(n_estimators=100),
 			   "SVM": SVC(probability=True),
 			   "SGD": SGDClassifier(loss="hinge", penalty="l2", max_iter=5)
 			   }
+
+classifiers_list = ['RF','KNN','DTREE','GNB','LRG','ABC','MLP','QDA','SVM','SGD']
