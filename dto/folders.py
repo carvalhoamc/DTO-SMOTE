@@ -12,10 +12,10 @@ pca_multiclasse ='./../rank/pca_multiclasse/'
 work_delaunay_dir = './../delaunay_files/'
 
 
-train_smote_ext = ["_train", "_SMOTE", "_Borderline1", "_Borderline2", "_smoteSVM"]
+train_smote_ext = ["_train", "_SMOTE", "_Borderline1", "_Borderline2", "_smoteSVM","_Geometric_SMOTE"]
 preproc_type = train_smote_ext
 metricas_biclasse = ['PRE', 'REC', 'SPE', 'F1', 'GEO', 'IBA', 'AUC']
-metricas_multiclasse = ['pre', 'rec', 'spe', 'f1', 'geo', 'iba']
+metricas_multiclasse = ['PRE', 'REC', 'SPE', 'F1', 'GEO', 'IBA']
 
 classifiers = ["_RF_", "_KNN_", "_DTREE_", "_GNB_", "_LRG_", "_ABC_", "_MLP_", "_KDA_", "_SVM_",
                "_SGD_", "_BBag_", "_EEC_", "_RUSBOOST_", "_SMOTEBOOST_"]
