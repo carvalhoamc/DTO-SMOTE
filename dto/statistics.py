@@ -5,6 +5,7 @@ from os.path import isfile, join
 from mpl_toolkits.mplot3d import axes3d
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.pyplot import figure
 from matplotlib import style
 
 style.use('ggplot')
@@ -106,7 +107,7 @@ class Statistics:
 		t = pd.Series(data=np.arange(0, df.shape[0], 1))
 		dfr = pd.DataFrame(
 				columns=['MODE', 'DATASET', 'PREPROC', 'ALGORITHM', 'ORDER', 'ALPHA', 'PRE', 'REC', 'SPE', 'F1', 'GEO',
-				         'IBA'],
+				         'IBA', 'AUC'],
 				index=np.arange(0, int(t.shape[0] / 5)))
 		
 		df_temp = df.groupby(by=['MODE', 'DATASET', 'PREPROC', 'ALGORITHM'])
@@ -127,6 +128,7 @@ class Statistics:
 			dfr.at[i, 'F1'] = group['F1'].mean()
 			dfr.at[i, 'GEO'] = group['GEO'].mean()
 			dfr.at[i, 'IBA'] = group['IBA'].mean()
+			dfr.at[i, 'AUC'] = group['AUC'].mean()
 			i = i + 1
 			print(i)
 		
@@ -203,10 +205,10 @@ class Statistics:
 			df.to_csv(dir_pca_multiclasse + reducao + '_' + tipo + '_' + order + '_' + str(alpha) + '.csv')
 			
 			j = 0
-			#for d in dataset_list_mult:
-			for d in dataset_list_bi:
-				#for m in metricas_multiclasse:
-				for m in metricas_biclasse:
+			for d in dataset_list_mult:
+			#for d in dataset_list_bi:
+				for m in metricas_multiclasse:
+				#for m in metricas_biclasse:
 					aux = group[group['DATASET'] == d]
 					aux = aux.reset_index()
 					df_tabela.at[j, 'DATASET'] = d
@@ -480,12 +482,12 @@ class Statistics:
 					wd + 'figurasCD/' + 'cd_' + reducao + '_' + tipo + '_' + delaunay_type + '_' + name + '_iba.pdf')
 			plt.close()
 			
-			avranks = list(media_auc_rank)
+			'''avranks = list(media_auc_rank)
 			cd = Orange.evaluation.compute_CD(avranks, len(dataset_list_bi))
 			Orange.evaluation.graph_ranks(avranks, identificadores, cd=cd, width=9, textspace=3)
 			plt.savefig(
 					wd + 'figurasCD/' + 'cd_' + reducao + '_' + tipo + '_' + delaunay_type + '_' + name + '_auc.pdf')
-			plt.close()
+			plt.close()'''
 			
 			print('Delaunay Type= ', delaunay_type)
 			print('Algorithm= ', name)
@@ -875,8 +877,8 @@ class Statistics:
 		dfrank.to_csv('./../output_dir/media_rank_all_alpha_order.csv', index=False)
 	
 	def rank_dto_by(self,geometry):
-		M = ['_pre.csv', '_rec.csv', '_spe.csv', '_f1.csv', '_geo.csv','_iba.csv', '_auc.csv']
-		#M = ['_pre.csv', '_rec.csv', '_spe.csv', '_f1.csv', '_geo.csv', '_iba.csv']
+		#M = ['_pre.csv', '_rec.csv', '_spe.csv', '_f1.csv', '_geo.csv','_iba.csv', '_auc.csv']
+		M = ['_pre.csv', '_rec.csv', '_spe.csv', '_f1.csv', '_geo.csv', '_iba.csv']
 		
 		df_media_rank = pd.DataFrame(columns=['ALGORITHM', 'RANK_ORIGINAL', 'RANK_SMOTE',
 		                                  'RANK_SMOTE_SVM', 'RANK_BORDERLINE1', 'RANK_BORDERLINE2',
@@ -933,14 +935,26 @@ class Statistics:
 		
 	def grafico_variacao_alpha(self):
 		M = ['_geo', '_iba']
-		order = ['solid_angle','min_solid_angle','max_solid_angle']
+		order = ['area',  # ok
+		         'volume',  # ok
+		         'area_volume_ratio',  # ok
+		         'edge_ratio',  # ok
+		         'radius_ratio',  # ok
+		         'aspect_ratio',  # ok
+		         'max_solid_angle',
+		         'min_solid_angle',
+		         'solid_angle']
 		
 		# Dirichlet Distribution alphas
-		alphas = np.arange(1, 10, 0.5)
+		alphas = np.arange(1,11,0.5)
 		
 		df_alpha_variations_rank = pd.DataFrame()
 		df_alpha_variations_rank['alphas'] = alphas
 		df_alpha_variations_rank.index=alphas
+		
+		df_alpha_all = pd.DataFrame()
+		df_alpha_all['alphas'] = alphas
+		df_alpha_all.index = alphas
 		
 		for m in M:
 			for o in order:
@@ -950,6 +964,7 @@ class Statistics:
 					df = pd.read_csv(filename)
 					mean = df.loc[10,'RANK_DELAUNAY']
 					df_alpha_variations_rank.loc[a,'AVARAGE_RANK'] = mean
+				
 				if m == '_geo':
 					measure = 'GEO'
 				if m == '_iba':
@@ -957,18 +972,103 @@ class Statistics:
 				if m == '_auc':
 					measure = 'AUC'
 				
+				df_alpha_all[o+'_'+measure] = df_alpha_variations_rank['AVARAGE_RANK'].copy()
+				
 				fig, ax = plt.subplots()
 				ax.set_title('DTO AVARAGE RANK\n ' +'GEOMETRY = '+ o +'\nMEASURE = '+ measure,fontsize=10)
 				ax.set_xlabel('Alpha')
 				ax.set_ylabel('Rank')
-				plt.ylabel('Rank')
-				plt.xlabel('Alpha')
-				plt.title('DTO AVARAGE RANK\n ' +'GEOMETRY = '+ o +'\nMEASURE = '+ measure,fontsize=10)
-				
-				ax.plot(df_alpha_variations_rank['AVARAGE_RANK'],marker='d')
-				legend = ax.legend(loc='upper right', shadow=True, fontsize='small')
-				# Put a nicer background color on the legend.
-				legend.get_frame().set_facecolor('C0')
-				fig.savefig('./../variacao_alpha/graphics/'+o + '_'+measure+'.png',dpi=125)
+				ax.plot(df_alpha_variations_rank['AVARAGE_RANK'],marker='d',label='Avarage Rank')
+				ax.legend(loc="upper right")
+				plt.xticks(range(11))
+				fig.savefig('./../variacao_alpha/graphics/multiclass_'+o + '_'+measure+'.png',dpi=125)
 				plt.show()
 				plt.close()
+		
+		#figure(num=None, figsize=(10, 10), dpi=800, facecolor='w', edgecolor='k')
+		
+		fig, ax = plt.subplots(figsize=(10,7))
+		ax.set_title('DTO AVARAGE RANK\n ' + '\nMEASURE = GEO' , fontsize=5)
+		ax.set_xlabel('Alpha')
+		ax.set_ylabel('Rank')
+		t1=df_alpha_all['alphas']
+		t2=df_alpha_all['alphas']
+		t3 = df_alpha_all['alphas']
+		t4 = df_alpha_all['alphas']
+		t5 = df_alpha_all['alphas']
+		t6 = df_alpha_all['alphas']
+		t7 = df_alpha_all['alphas']
+		t8 = df_alpha_all['alphas']
+		t9 = df_alpha_all['alphas']
+		
+		ft1=df_alpha_all['area_GEO']
+		ft2=df_alpha_all['volume_GEO']
+		ft3=df_alpha_all['area_volume_ratio_GEO']
+		ft4=df_alpha_all['edge_ratio_GEO']
+		ft5=df_alpha_all['radius_ratio_GEO']
+		ft6=df_alpha_all['aspect_ratio_GEO']
+		ft7=df_alpha_all['max_solid_angle_GEO']
+		ft8=df_alpha_all['min_solid_angle_GEO']
+		ft9=df_alpha_all['solid_angle_GEO']
+		
+		
+		ax.plot(t1, ft1, color='tab:blue', marker='o',label='area')
+		ax.plot(t2, ft2, color='tab:red', marker='o', label='volume')
+		ax.plot(t3, ft3, color='tab:green', marker='o', label='area_volume_ratio')
+		ax.plot(t4, ft4, color='tab:orange', marker='o', label='edge_ratio')
+		ax.plot(t5, ft5, color='tab:olive', marker='o', label='radius_ratio')
+		ax.plot(t6, ft6, color='tab:purple', marker='o', label='aspect_ratio')
+		ax.plot(t7, ft7, color='tab:brown', marker='o', label='max_solid_angle')
+		ax.plot(t8, ft8, color='tab:pink', marker='o', label='min_solid_angle')
+		ax.plot(t9, ft9, color='tab:gray', marker='o', label='solid_angle')
+		
+		leg = ax.legend(loc='upper right')
+		leg.get_frame().set_alpha(0.5)
+		plt.xticks(range(12))
+		plt.savefig('./../variacao_alpha/graphics/multiclass_all_geo.png', dpi=800)
+		plt.show()
+		plt.close()
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		'''
+		fig, ax = plt.subplots()
+		ax.set_title('DTO AVARAGE RANK\n ' + '\nMEASURE = IBA' , fontsize=10)
+		ax.set_xlabel('Alpha')
+		ax.set_ylabel('Rank')
+		t1 = df_alpha_all['alphas']
+		t2 = df_alpha_all['alphas']
+		t3 = df_alpha_all['alphas']'''
+		
+		''''area_IBA',
+		'volume_IBA',
+		'area_volume_ratio_IBA',
+		'edge_ratio_IBA',
+		'radius_ratio_IBA',
+		'aspect_ratio_IBA',
+		'max_solid_angle_IBA',
+		'min_solid_angle_IBA',
+		'solid_angle_IBA'
+		'''
+		
+		
+		'''
+		ft1 = df_alpha_all['solid_angle_IBA']
+		ft2 = df_alpha_all['min_solid_angle_IBA']
+		ft3 = df_alpha_all['max_solid_angle_IBA']
+		ax.plot(t1, ft1, color='tab:blue', marker='o', label='solid_angle')
+		ax.plot(t2, ft2, color='tab:red', marker='o', label='min_solid_angle')
+		ax.plot(t3, ft3, color='tab:green', marker='o', label='max_solid_angle')
+		leg = ax.legend(loc='upper right')
+		leg.get_frame().set_alpha(0.5)
+		plt.xticks(range(11))
+		plt.savefig('./../variacao_alpha/graphics/multiclass_all_iba.png', dpi=800)
+		plt.show()
+		plt.close()'''
+		
