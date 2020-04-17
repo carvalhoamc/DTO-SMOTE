@@ -94,7 +94,7 @@ class DTO(BaseOverSampler):
 		self.random_state = check_random_state(self.random_state)
 		#class_sample is the label of each class
 		#n_samples is the necessary samples to balanced this class
-		for class_sample, n_samples in self.ratio_.items():
+		for class_sample, n_samples in self.sampling_strategy_.items():
 			if n_samples == 0:
 				continue
 			

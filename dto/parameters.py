@@ -1,13 +1,13 @@
-from sklearn.decomposition import PCA
-from sklearn.manifold import Isomap
 import numpy as np
+from sklearn.decomposition import PCA
+
 #geometry
-order = [#'area',#ok
-         #'volume',#ok
-         #'area_volume_ratio',#ok
-         #'edge_ratio',#ok
-         #'radius_ratio',#ok
-         #'aspect_ratio',#ok
+order = ['area',#ok
+         'volume',#ok
+         'area_volume_ratio',#ok
+         'edge_ratio',#ok
+         'radius_ratio',#ok
+         'aspect_ratio',#ok
          'max_solid_angle',
          'min_solid_angle',
          'solid_angle']

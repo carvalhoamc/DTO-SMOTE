@@ -1,5 +1,3 @@
-work_dir = './../datasets/'
-folder_experiments = work_dir
 output_dir = "./../output_dir/"
 mesh_folder = "./../mesh/"
 graph_folder = "./../graph/"
