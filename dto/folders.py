@@ -1,24 +1,24 @@
 output_dir = "./../output_dir/"
 mesh_folder = "./../mesh/"
-graph_folder = "./../graph/"
-dir_pca_biclasse = './../rank/pca_biclasse/'
-dir_pca_multiclasse = './../rank/pca_multiclasse/'
-dir_melhor_pca_biclasse = './../rank/melhor_pca_biclasse/'
-dir_melhor_pca_multiclasse ='./../rank/melhor_pca_multiclasse/'
-pca_biclasse = './../rank/pca_biclasse/'
-pca_multiclasse ='./../rank/pca_multiclasse/'
-work_delaunay_dir = './../delaunay_files/'
+#graph_folder = "./../graph/"
+#dir_pca_biclasse = './../rank/pca_biclasse/'
+#dir_pca_multiclasse = './../rank/pca_multiclasse/'
+#dir_melhor_pca_biclasse = './../rank/melhor_pca_biclasse/'
+#dir_melhor_pca_multiclasse ='./../rank/melhor_pca_multiclasse/'
+#pca_biclasse = './../rank/pca_biclasse/'
+#pca_multiclasse ='./../rank/pca_multiclasse/'
+#work_delaunay_dir = './../delaunay_files/'
 
 
-train_smote_ext = ["_train", "_SMOTE", "_Borderline1", "_Borderline2", "_smoteSVM","_Geometric_SMOTE"]
-preproc_type = train_smote_ext
-metricas_biclasse = ['PRE', 'REC', 'SPE', 'F1', 'GEO', 'IBA', 'AUC']
-metricas_multiclasse = ['PRE', 'REC', 'SPE', 'F1', 'GEO', 'IBA']
+#train_smote_ext = ["_train", "_SMOTE", "_Borderline1", "_Borderline2", "_smoteSVM","_Geometric_SMOTE"]
+#preproc_type = train_smote_ext
+#metricas_biclasse = ['PRE', 'REC', 'SPE', 'F1', 'GEO', 'IBA', 'AUC']
+#metricas_multiclasse = ['PRE', 'REC', 'SPE', 'F1', 'GEO', 'IBA']
 
-classifiers = ["_RF_", "_KNN_", "_DTREE_", "_GNB_", "_LRG_", "_ABC_", "_MLP_", "_KDA_", "_SVM_",
-               "_SGD_", "_BBag_", "_EEC_", "_RUSBOOST_", "_SMOTEBOOST_"]
+#classifiers = ["_RF_", "_KNN_", "_DTREE_", "_GNB_", "_LRG_", "_ABC_", "_MLP_", "_KDA_", "_SVM_",
+#               "_SGD_", "_BBag_", "_EEC_", "_RUSBOOST_", "_SMOTEBOOST_"]
 
-classifiers_multiclasse = ["_RF_", "_KNN_", "_DTREE_", "_GNB_", "_LRG_", "_ABC_", "_MLP_", "_KDA_", "_SVM_"]
+#classifiers_multiclasse = ["_RF_", "_KNN_", "_DTREE_", "_GNB_", "_LRG_", "_ABC_", "_MLP_", "_KDA_", "_SVM_"]
 
 
 
