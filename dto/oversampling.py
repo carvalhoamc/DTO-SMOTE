@@ -98,7 +98,7 @@ class Oversampling:
 				X_res, y_res = smote.fit_sample(X, Y)
 				y_res = y_res.reshape(len(y_res), 1)
 				newdata = np.hstack([X_res, y_res])
-				newtrain = pd.DataFrame(np.vstack([train, newdata]))
+				newtrain = pd.DataFrame([train, newdata])
 				newtrain.to_csv(os.path.join(folder, dataset, str(fold), ''.join([dataset, "_SMOTE.csv"])),
 				                header=False, index=False)
 				# SMOTE BORDERLINE1
@@ -106,7 +106,7 @@ class Oversampling:
 				X_res, y_res = borderline1.fit_sample(X, Y)
 				y_res = y_res.reshape(len(y_res), 1)
 				newdata = np.hstack([X_res, y_res])
-				newtrain = pd.DataFrame(np.vstack([train, newdata]))
+				newtrain = pd.DataFrame([train, newdata])
 				newtrain.to_csv(os.path.join(folder, dataset, str(fold), ''.join([dataset, "_Borderline1.csv"])),
 				                header=False, index=False)
 				# SMOTE BORDERLINE2
@@ -114,7 +114,7 @@ class Oversampling:
 				X_res, y_res = borderline2.fit_sample(X, Y)
 				y_res = y_res.reshape(len(y_res), 1)
 				newdata = np.hstack([X_res, y_res])
-				newtrain = pd.DataFrame(np.vstack([train, newdata]))
+				newtrain = pd.DataFrame([train, newdata])
 				newtrain.to_csv(os.path.join(folder, dataset, str(fold), ''.join([dataset, "_Borderline2.csv"])),
 				                header=False, index=False)
 				# SMOTE SVM
@@ -122,7 +122,7 @@ class Oversampling:
 				X_res, y_res = smoteSVM.fit_sample(X, Y)
 				y_res = y_res.reshape(len(y_res), 1)
 				newdata = np.hstack([X_res, y_res])
-				newtrain = pd.DataFrame(np.vstack([train, newdata]))
+				newtrain = pd.DataFrame([train, newdata])
 				newtrain.to_csv(os.path.join(folder, dataset, str(fold), ''.join([dataset, "_smoteSVM.csv"])),
 				                header=False, index=False)
 				
@@ -131,7 +131,7 @@ class Oversampling:
 				X_res, y_res = geometric_smote.fit_resample(X, Y)
 				y_res = y_res.reshape(len(y_res), 1)
 				newdata = np.hstack([X_res, y_res])
-				newtrain = pd.DataFrame(np.vstack([train, newdata]))
+				newtrain = pd.DataFrame([train, newdata])
 				newtrain.to_csv(os.path.join(folder, dataset, str(fold), ''.join([dataset, "_Geometric_SMOTE.csv"])),
 				                header=False, index=False)
 	
