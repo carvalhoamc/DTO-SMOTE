@@ -16,7 +16,7 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.preprocessing import normalize
 from DelaunayMesh import DTO
 from classifiers import classifiers
-from folders import output_dir, graph_folder
+from folders import output_dir
 from parameters import projectors, order, alphas, train_smote_ext
 from gsmote import GeometricSMOTE
 import warnings
