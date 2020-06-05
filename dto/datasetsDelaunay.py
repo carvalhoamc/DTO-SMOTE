@@ -1,4 +1,4 @@
-datasets = [
+dataset_biclass = [
 	'x81data',
 	'x80data',
 	'x7data',
@@ -61,25 +61,8 @@ datasets = [
 	'wholesale-channel',
 	'wilt'
 ]
-'''
-datasets = ['spambase',
-	'spectf-heart',
-	'statlog-german-credit',
-	'statlog-german-credit-numeric',
-	'thoracic-surgery',
-	'thyroid-hypothyroid',
-	'thyroid-sick-euthyroid',
-	'vertebra-column-2c',
-	'wdbc',
-	'wholesale-channel',
-	'wilt'
-]
-'''
 
-
-dataset_list_bi = datasets
-
-datasets_list3_MultClasses = [
+dataset_multiclass = [
 	'contraceptive',
 	'dermatology',
 	'glass',
@@ -89,4 +72,3 @@ datasets_list3_MultClasses = [
 	'wine'
 ]
 
-dataset_list_mult = datasets_list3_MultClasses
