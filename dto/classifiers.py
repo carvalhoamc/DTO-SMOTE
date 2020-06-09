@@ -1,3 +1,4 @@
+#from imblearn.ensemble import BalancedBaggingClassifier, EasyEnsembleClassifier, RUSBoostClassifier
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -8,14 +9,18 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
-classifiers = {"RF": RandomForestClassifier(n_estimators=100),
-               "KNN": KNeighborsClassifier(),
-               "DTREE": DecisionTreeClassifier(),
-               "LRG": LogisticRegression(),
-               "ABC": AdaBoostClassifier(),
-               "MLP": MLPClassifier(max_iter=500),
-               "SVM": SVC(probability=True),
-               "SGD": SGDClassifier(loss="hinge", penalty="l2", max_iter=5)
-               }
+base_estimator = AdaBoostClassifier(n_estimators=10)
 
-classifiers_list = ['RF', 'KNN', 'DTREE', 'LRG', 'ABC', 'MLP', 'SVM', 'SGD']
+classifiers = {"RF": RandomForestClassifier(n_estimators=100),
+			   "KNN": KNeighborsClassifier(),
+			   "DTREE": DecisionTreeClassifier(),
+			   "GNB": GaussianNB(),
+			   "LRG": LogisticRegression(),
+			   "ABC": AdaBoostClassifier(),
+			   "MLP": MLPClassifier(max_iter=500),
+			   "QDA": QuadraticDiscriminantAnalysis(store_covariance=True),
+			   "SVM": SVC(probability=True),
+			   "SGD": SGDClassifier(loss="hinge", penalty="l2", max_iter=5)
+			   }
+
+classifiers_list = ['RF','KNN','DTREE','GNB','LRG','ABC','MLP','QDA','SVM','SGD']

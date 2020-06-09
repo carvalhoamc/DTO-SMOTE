@@ -1,4 +1,4 @@
-dataset_biclass = [
+datasets = [
 	'x81data',
 	'x80data',
 	'x7data',
@@ -62,7 +62,10 @@ dataset_biclass = [
 	'wilt'
 ]
 
-dataset_multiclass = [
+
+dataset_list_bi = datasets
+
+datasets_list3_MultClasses = [
 	'contraceptive',
 	'dermatology',
 	'glass',
@@ -72,3 +75,4 @@ dataset_multiclass = [
 	'wine'
 ]
 
+dataset_list_mult = datasets_list3_MultClasses
