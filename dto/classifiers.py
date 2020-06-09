@@ -14,11 +14,9 @@ base_estimator = AdaBoostClassifier(n_estimators=10)
 classifiers = {"RF": RandomForestClassifier(n_estimators=100),
 			   "KNN": KNeighborsClassifier(),
 			   "DTREE": DecisionTreeClassifier(),
-			   "GNB": GaussianNB(),
 			   "LRG": LogisticRegression(),
 			   "ABC": AdaBoostClassifier(),
 			   "MLP": MLPClassifier(max_iter=500),
-			   "QDA": QuadraticDiscriminantAnalysis(store_covariance=True),
 			   "SVM": SVC(probability=True),
 			   "SGD": SGDClassifier(loss="hinge", penalty="l2", max_iter=5)
 			   }
